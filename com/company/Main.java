@@ -1,5 +1,6 @@
 package com.company;
 
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
 import java.text.DateFormatSymbols;
@@ -9,6 +10,12 @@ public class Main {
     public static Boolean operationSuccess;
 
     public static void main(String[] args) {
+        // task 2.1
+        if(args.length > 0) {
+            //part 1 and 3
+            lengthNumberCounter(args);
+        }
+
 
         Scanner selectTask = new Scanner(System.in);
         String taskSelect = "";
@@ -94,6 +101,46 @@ public class Main {
 
 
     }
+
+    public static void lengthNumberCounter(String[] args) {
+
+        int minNumber = 10;
+        int maxNumber = 0;
+        String minStr = null;
+        String maxStr = null;
+
+        for (String value : args) {
+            if (value.length() < minNumber) {
+                minNumber = value.length();
+                minStr = value;
+            }
+            if (value.length() > maxNumber) {
+                maxNumber = value.length();
+                maxStr = value;
+            }
+        }
+        System.out.println("Min. number " + minStr + " length is " + minNumber
+                + "\nMax. number " + maxStr + " length is " + maxNumber);
+
+        int midLength = maxNumber/2;
+        afterMidLengthNumbers(midLength, args);
+    }
+
+
+    public static void afterMidLengthNumbers(Integer midLength,String[] args) {
+        System.out.println("Mid number length " + midLength);
+        for (String value : args) {
+            if (value.length() >= midLength) {
+                System.out.println("Number " + value + ". Digits more than mid. Length is " + value.length());
+            }
+        }
+        for (String value : args) {
+            if (value.length() <= midLength) {
+                System.out.println("Number " + value + ". Digits less than mid. Length is " + value.length());
+            }
+        }
+    }
+
 
     public static void randomValues(Integer length) {
 
