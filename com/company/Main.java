@@ -10,12 +10,18 @@ public class Main {
     public static Boolean operationSuccess;
 
     public static void main(String[] args) {
-        // task 2.1
+        // task II
+        if(args.length == 1) {
+            //part 3
+            findInlineNegativeSumBetweenPositiveNumbers(args);
+        }
+
+        // task I
         if(args.length > 0) {
+            System.out.println("Task I part 1 and 3");
             //part 1 and 3
             lengthNumberCounter(args);
         }
-
 
         Scanner selectTask = new Scanner(System.in);
         String taskSelect = "";
@@ -89,6 +95,40 @@ public class Main {
         System.out.println("Finish");
     }
 
+    public static void findInlineNegativeSumBetweenPositiveNumbers(String[] args) {
+
+        int arrBitRate = Integer.parseInt(args[0]);
+        int[][] array = new int[arrBitRate][arrBitRate];
+        int rowBetweenSum = 0;
+        int arrayBetweenSum = 0;
+        boolean inGap = false;
+        boolean findPositive = false;
+        for (int i = 0; i < array.length; i++) {
+            inGap = false;
+            findPositive = false;
+            rowBetweenSum = 0;
+            for (int j = 0; j < array[i].length; j++) {
+                array[i][j] = (int) Math.round((Math.random() * 200) - 100);
+
+                if (array[i][j] > 0) {
+                    findPositive = true;
+                }
+                if (array[i][j] < 0 && findPositive == true) {
+                    inGap = true;
+                }
+                if (array[i][j] < 0 && inGap == true) {
+                    rowBetweenSum += array[i][j];
+                }
+                if (array[i][j] > 0 && findPositive == true && inGap == true) {
+                    arrayBetweenSum += rowBetweenSum;
+                    inGap = false;
+                }
+            }
+            System.out.println("Sum between positive numbers in line = " + rowBetweenSum);
+        }
+        System.out.println("Task II part 1 Sum between positive numbers in array = " + arrayBetweenSum);
+    }
+
     public static void helloUser(String inputName) {
 
         if (inputName.matches("^[a-zA-Z]+$")) {
@@ -98,8 +138,6 @@ public class Main {
             System.out.println("Oops! Wrong name. Check input.");
             operationSuccess = false;
         }
-
-
     }
 
     public static void lengthNumberCounter(String[] args) {
